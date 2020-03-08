@@ -1,0 +1,75 @@
+{
+    "name": "itinerisltd/code-snippet-block",
+    "type": "wordpress-plugin",
+    "description": "TODO",
+    "keywords": [
+        "wordpress",
+        "wp"
+    ],
+    "homepage": "https://github.com/ItinerisLtd/code-snippet-block",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Itineris Limited",
+            "email": "dev@itineris.co.uk",
+            "homepage": "https://www.itineris.co.uk/",
+            "role": "Company"
+        },
+        {
+            "name": "Tang Rufus",
+            "email": "tangrufus@gmail.com",
+            "homepage": "https://typist.tech/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Itineris\\CodeSnippetBlock\\": "src/"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "*",
+            "!*LICENSE*",
+            "!*.php",
+            "!/README.txt",
+            "!src",
+            "test",
+            "tests"
+        ]
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "pretag": [
+            "composer update",
+            "composer normalize",
+            "github_changelog_generator --no-verbose",
+            "npx doctoc README.md"
+        ],
+        "release:build": [
+            "rm -fr vendor",
+            "composer install --no-dev --prefer-dist --optimize-autoloader --no-suggest",
+            "rm -fr release wordpress",
+            "composer archive --format=zip --dir=release --file=code-snippet-block"
+        ]
+    },
+    "support": {
+        "email": "dev@itineris.co.uk",
+        "issues": "https://github.com/ItinerisLtd/code-snippet-block/issues",
+        "source": "https://github.com/ItinerisLtd/code-snippet-block"
+    }
+}

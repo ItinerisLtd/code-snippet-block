@@ -1,0 +1,27 @@
+{
+  "engines": {
+    "node": "^12.16.1"
+  },
+  "devDependencies": {
+    "@tinypixelco/laravel-mix-wp-blocks": "^1.0.0",
+    "@wordpress/babel-preset-default": "^4.10.0",
+    "@wordpress/block-editor": "^3.7.3",
+    "@wordpress/blocks": "^6.12.1",
+    "@wordpress/dependency-extraction-webpack-plugin": "^2.3.0",
+    "@wordpress/i18n": "^3.9.0",
+    "cross-env": "^7.0.2",
+    "github-syntax-light": "^0.5.0",
+    "laravel-mix": "^5.0.1",
+    "node-sass": "^4.13.1",
+    "resolve-url-loader": "^3.1.1",
+    "sass-loader": "^8.0.2"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  }
+}
