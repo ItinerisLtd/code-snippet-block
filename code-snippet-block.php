@@ -35,6 +35,8 @@ function render($attributes): string
         return '';
     }
 
+    $language = (string) ($attributes['language'] ?? 'php');
+
     $authorization = null;
     if (defined('CODE_SNIPPET_BLOCK_GITHUB_PERSONAL_ACCESS_TOKEN')) {
         $authorization = sprintf(
@@ -54,7 +56,7 @@ function render($attributes): string
             'accept' => 'application/vnd.github.v3+json',
             'authorization' => $authorization,
         ],
-        'body' => '```php' . PHP_EOL . $content . PHP_EOL . '```',
+        'body' => sprintf("```%s\n%s\n```", $language, $content),
     ]);
 
     return wp_kses_post($response['body']);
