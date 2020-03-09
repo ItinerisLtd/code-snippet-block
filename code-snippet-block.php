@@ -28,6 +28,9 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 
 // TODO: Move into PHP classes.
+define('CODE_SNIPPET_BLOCK_VERSION', '0.0.1');
+
+// TODO: Move into PHP classes.
 function render($attributes): string
 {
     $content = (string) ($attributes['content'] ?? '');
@@ -45,7 +48,7 @@ function render($attributes): string
             constant('CODE_SNIPPET_BLOCK_GITHUB_PERSONAL_ACCESS_TOKEN')
         );
     }
-    
+
     // TODO: Save into transient cache.
     // TODO: Add TLC Transients.
     // $cacheKey = md5($content);
@@ -67,21 +70,23 @@ function render($attributes): string
 // TODO: Move into PHP classes.
 add_action('init', function (): void
 {
-    $jsAssets = include __DIR__ . '/dist/js/editor.asset.php';
+    $editorAsset = [];
+    if (file_exists(__DIR__ . '/dist/js/editor.asset.php')) {
+        $editorAsset = include __DIR__ . '/dist/js/editor.asset.php';
+    }
+
     wp_register_script(
         'code-snippet-block-editor-script',
         plugins_url('dist/js/editor.js', __FILE__),
-        $jsAssets['dependencies'],
-        $jsAssets['version']
+        $editorAsset['dependencies'] ?? [],
+        $editorAsset['version'] ?? CODE_SNIPPET_BLOCK_VERSION
     );
 
-    // TODO: cssAssets?
-    // $cssAssets = include __DIR__ . '/dist/css/editor.asset.php';
     wp_register_style(
         'code-snippet-block-block-style',
         plugins_url( 'dist/css/block.css', __FILE__ ),
-        // $cssAssets['dependencies'],
-        // $cssAssets['version']
+        [],
+        CODE_SNIPPET_BLOCK_VERSION
     );
 
     register_block_type('code-snippet-block/code-snippet-block', [
