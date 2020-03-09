@@ -35,15 +35,24 @@ function render($attributes): string
         return '';
     }
 
+    $authorization = null;
+    if (defined('CODE_SNIPPET_BLOCK_GITHUB_PERSONAL_ACCESS_TOKEN')) {
+        $authorization = sprintf(
+            'token %s',
+            constant('CODE_SNIPPET_BLOCK_GITHUB_PERSONAL_ACCESS_TOKEN')
+        );
+    }
+    
     // TODO: Save into transient cache.
     // TODO: Add TLC Transients.
     // $cacheKey = md5($content);
 
-    // TODO: Allow adding GitHub api key.
     // TODO: Allow customizing language.
     $response = wp_remote_post('https://api.github.com/markdown/raw', [
         'headers' => [
             'content-type' => 'text/plain',
+            'accept' => 'application/vnd.github.v3+json',
+            'authorization' => $authorization,
         ],
         'body' => '```php' . PHP_EOL . $content . PHP_EOL . '```',
     ]);
