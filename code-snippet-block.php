@@ -51,6 +51,7 @@ function render($attributes): string
     // $cacheKey = md5($content);
 
     // TODO: Allow customizing language.
+    // TODO: Do not send api request when rate limited.
     $response = wp_remote_post('https://api.github.com/markdown/raw', [
         'headers' => [
             'content-type' => 'text/plain',
