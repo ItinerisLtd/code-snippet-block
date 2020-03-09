@@ -55,6 +55,7 @@ function render($attributes): string
 
     // TODO: Allow customizing language.
     // TODO: Do not send api request when rate limited.
+    // TODO: Check response is 200 okay.
     $response = wp_remote_post('https://api.github.com/markdown/raw', [
         'headers' => [
             'content-type' => 'text/plain',
