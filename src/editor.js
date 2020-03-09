@@ -2,8 +2,6 @@ import { registerBlockType } from '@wordpress/blocks';
 import { PlainText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-console.log('bye block 222');
-
 registerBlockType( 'code-snippet-block/code-snippet-block', {
   title: 'Code Snippet',
   // TODO: Icon.
